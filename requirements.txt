@@ -3,7 +3,7 @@
 # Sync with readthedocs:
 # https://github.com/readthedocs/readthedocs.org/blob/master/requirements/pip.txt
 # https://github.com/readthedocs/readthedocs.org/blob/master/requirements/local-docs-build.txt
-sphinx==1.8.5  # pyup: <2.0.0
+sphinx==3.0.4  # pyup: <2.0.0
 sphinx_rtd_theme==0.4.3
 
 # Code tabs extension for GDScript/C#
@@ -14,3 +14,5 @@ sphinx-notfound-page==0.6
 
 # Full-page search UI for RTD: https://readthedocs-sphinx-search.readthedocs.io
 readthedocs-sphinx-search==0.1.0
+pygments>=2.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
