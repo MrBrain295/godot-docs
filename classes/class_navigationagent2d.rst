@@ -486,7 +486,7 @@ The distance to search for other agents.
 - void **set_path_desired_distance** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_path_desired_distance** **(** **)**
 
-The distance threshold before a path point is considered to be reached. This allows agents to not have to hit a path point on the path exactly, but only to reach its general area. If this value is set too high, the NavigationAgent will skip points on the path, which can lead too leaving the navigation mesh. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the next point on each physics frame update.
+The distance threshold before a path point is considered to be reached. This allows agents to not have to hit a path point on the path exactly, but only to reach its general area. If this value is set too high, the NavigationAgent will skip points on the path, which can lead to leaving the navigation mesh. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the next point on each physics frame update.
 
 .. rst-class:: classref-item-separator
 
@@ -607,7 +607,7 @@ The distance threshold before the final target point is considered to be reached
 - void **set_target_position** **(** :ref:`Vector2<class_Vector2>` value **)**
 - :ref:`Vector2<class_Vector2>` **get_target_position** **(** **)**
 
-If set a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent2D_property_target_position>` is requested from the NavigationServer.
+If set, a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent2D_property_target_position>` is requested from the NavigationServer.
 
 .. rst-class:: classref-item-separator
 
