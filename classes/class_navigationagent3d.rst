@@ -59,6 +59,8 @@ Properties
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`float<class_float>`                                                                      | :ref:`height<class_NavigationAgent3D_property_height>`                                             | ``1.0``               |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`keep_y_velocity<class_NavigationAgent3D_property_keep_y_velocity>`                           | ``true``              |
+   +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`                                                                          | :ref:`max_neighbors<class_NavigationAgent3D_property_max_neighbors>`                               | ``10``                |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`float<class_float>`                                                                      | :ref:`max_speed<class_NavigationAgent3D_property_max_speed>`                                       | ``10.0``              |
@@ -286,7 +288,7 @@ If ``true`` the agent is registered for an RVO avoidance callback on the :ref:`N
 - void **set_avoidance_layers** **(** :ref:`int<class_int>` value **)**
 - :ref:`int<class_int>` **get_avoidance_layers** **(** **)**
 
-A bitfield determining the avoidance layers for this NavigationAgent. Other agent's with a matching bit on the :ref:`avoidance_mask<class_NavigationAgent3D_property_avoidance_mask>` will avoid this agent.
+A bitfield determining the avoidance layers for this NavigationAgent. Other agents with a matching bit on the :ref:`avoidance_mask<class_NavigationAgent3D_property_avoidance_mask>` will avoid this agent.
 
 .. rst-class:: classref-item-separator
 
@@ -406,6 +408,23 @@ If ``true`` uses the defined :ref:`debug_path_custom_color<class_NavigationAgent
 - :ref:`float<class_float>` **get_height** **(** **)**
 
 The height of the avoidance agent. Agents will ignore other agents or obstacles that are above or below their current position + height in 2D avoidance. Does nothing in 3D avoidance which uses radius spheres alone.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NavigationAgent3D_property_keep_y_velocity:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **keep_y_velocity** = ``true``
+
+.. rst-class:: classref-property-setget
+
+- void **set_keep_y_velocity** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **get_keep_y_velocity** **(** **)**
+
+If ``true``, and the agent uses 2D avoidance, it will remember the set y-axis velocity and reapply it after the avoidance step. While 2D avoidance has no y-axis and simulates on a flat plane this setting can help mitigate the most obvious clipping on uneven 3D geometry.
 
 .. rst-class:: classref-item-separator
 
@@ -611,7 +630,7 @@ Does not affect normal pathfinding. To change an actor's pathfinding radius bake
 - void **set_target_desired_distance** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_target_desired_distance** **(** **)**
 
-The distance threshold before the final target point is considered to be reached. This allows agents to not have to hit the point of the final target exactly, but only to reach its general. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the final target point on each physics frame update.
+The distance threshold before the final target point is considered to be reached. This allows agents to not have to hit the point of the final target exactly, but only to reach its general area. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the final target point on each physics frame update.
 
 .. rst-class:: classref-item-separator
 
@@ -628,7 +647,7 @@ The distance threshold before the final target point is considered to be reached
 - void **set_target_position** **(** :ref:`Vector3<class_Vector3>` value **)**
 - :ref:`Vector3<class_Vector3>` **get_target_position** **(** **)**
 
-If set a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent3D_property_target_position>` is requested from the NavigationServer.
+If set, a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent3D_property_target_position>` is requested from the NavigationServer.
 
 .. rst-class:: classref-item-separator
 
