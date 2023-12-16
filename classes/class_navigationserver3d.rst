@@ -103,6 +103,8 @@ Methods
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                | :ref:`bake_from_source_geometry_data<class_NavigationServer3D_method_bake_from_source_geometry_data>` **(** :ref:`NavigationMesh<class_NavigationMesh>` navigation_mesh, :ref:`NavigationMeshSourceGeometryData3D<class_NavigationMeshSourceGeometryData3D>` source_geometry_data, :ref:`Callable<class_Callable>` callback=Callable() **)**                            |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                | :ref:`bake_from_source_geometry_data_async<class_NavigationServer3D_method_bake_from_source_geometry_data_async>` **(** :ref:`NavigationMesh<class_NavigationMesh>` navigation_mesh, :ref:`NavigationMeshSourceGeometryData3D<class_NavigationMeshSourceGeometryData3D>` source_geometry_data, :ref:`Callable<class_Callable>` callback=Callable() **)**                |
+   +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                | :ref:`free_rid<class_NavigationServer3D_method_free_rid>` **(** :ref:`RID<class_RID>` rid **)**                                                                                                                                                                                                                                                                         |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                             | :ref:`get_debug_enabled<class_NavigationServer3D_method_get_debug_enabled>` **(** **)** |const|                                                                                                                                                                                                                                                                         |
@@ -176,6 +178,8 @@ Methods
    | :ref:`RID[]<class_RID>`                             | :ref:`map_get_obstacles<class_NavigationServer3D_method_map_get_obstacles>` **(** :ref:`RID<class_RID>` map **)** |const|                                                                                                                                                                                                                                               |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`PackedVector3Array<class_PackedVector3Array>` | :ref:`map_get_path<class_NavigationServer3D_method_map_get_path>` **(** :ref:`RID<class_RID>` map, :ref:`Vector3<class_Vector3>` origin, :ref:`Vector3<class_Vector3>` destination, :ref:`bool<class_bool>` optimize, :ref:`int<class_int>` navigation_layers=1 **)** |const|                                                                                           |
+   +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Vector3<class_Vector3>`                       | :ref:`map_get_random_point<class_NavigationServer3D_method_map_get_random_point>` **(** :ref:`RID<class_RID>` map, :ref:`int<class_int>` navigation_layers, :ref:`bool<class_bool>` uniformly **)** |const|                                                                                                                                                             |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`RID[]<class_RID>`                             | :ref:`map_get_regions<class_NavigationServer3D_method_map_get_regions>` **(** :ref:`RID<class_RID>` map **)** |const|                                                                                                                                                                                                                                                   |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -252,6 +256,8 @@ Methods
    | :ref:`int<class_int>`                               | :ref:`region_get_navigation_layers<class_NavigationServer3D_method_region_get_navigation_layers>` **(** :ref:`RID<class_RID>` region **)** |const|                                                                                                                                                                                                                      |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                               | :ref:`region_get_owner_id<class_NavigationServer3D_method_region_get_owner_id>` **(** :ref:`RID<class_RID>` region **)** |const|                                                                                                                                                                                                                                        |
+   +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Vector3<class_Vector3>`                       | :ref:`region_get_random_point<class_NavigationServer3D_method_region_get_random_point>` **(** :ref:`RID<class_RID>` region, :ref:`int<class_int>` navigation_layers, :ref:`bool<class_bool>` uniformly **)** |const|                                                                                                                                                    |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                           | :ref:`region_get_travel_cost<class_NavigationServer3D_method_region_get_travel_cost>` **(** :ref:`RID<class_RID>` region **)** |const|                                                                                                                                                                                                                                  |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -511,7 +517,7 @@ Sets the callback :ref:`Callable<class_Callable>` that gets called after each av
 
 void **agent_set_avoidance_enabled** **(** :ref:`RID<class_RID>` agent, :ref:`bool<class_bool>` enabled **)**
 
-If ``enabled`` the provided ``agent`` calculates avoidance.
+If ``enabled`` is ``true``, the provided ``agent`` calculates avoidance.
 
 .. rst-class:: classref-item-separator
 
@@ -727,6 +733,18 @@ Bakes the provided ``navigation_mesh`` with the data from the provided ``source_
 
 ----
 
+.. _class_NavigationServer3D_method_bake_from_source_geometry_data_async:
+
+.. rst-class:: classref-method
+
+void **bake_from_source_geometry_data_async** **(** :ref:`NavigationMesh<class_NavigationMesh>` navigation_mesh, :ref:`NavigationMeshSourceGeometryData3D<class_NavigationMeshSourceGeometryData3D>` source_geometry_data, :ref:`Callable<class_Callable>` callback=Callable() **)**
+
+Bakes the provided ``navigation_mesh`` with the data from the provided ``source_geometry_data`` as an async task running on a background thread. After the process is finished the optional ``callback`` will be called.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NavigationServer3D_method_free_rid:
 
 .. rst-class:: classref-method
@@ -913,7 +931,7 @@ Sets whether this ``link`` can be travelled in both directions.
 
 void **link_set_enabled** **(** :ref:`RID<class_RID>` link, :ref:`bool<class_bool>` enabled **)**
 
-If ``enabled`` is ``true`` the specified ``link`` will contribute to its current navigation map.
+If ``enabled`` is ``true``, the specified ``link`` will contribute to its current navigation map.
 
 .. rst-class:: classref-item-separator
 
@@ -1177,6 +1195,22 @@ Returns the navigation path to reach the destination from the origin. ``navigati
 
 ----
 
+.. _class_NavigationServer3D_method_map_get_random_point:
+
+.. rst-class:: classref-method
+
+:ref:`Vector3<class_Vector3>` **map_get_random_point** **(** :ref:`RID<class_RID>` map, :ref:`int<class_int>` navigation_layers, :ref:`bool<class_bool>` uniformly **)** |const|
+
+Returns a random position picked from all map region polygons with matching ``navigation_layers``.
+
+If ``uniformly`` is ``true``, all map regions, polygons, and faces are weighted by their surface area (slower).
+
+If ``uniformly`` is ``false``, just a random region and a random polygon are picked (faster).
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NavigationServer3D_method_map_get_regions:
 
 .. rst-class:: classref-method
@@ -1303,7 +1337,7 @@ Sets the map up direction.
 
 void **map_set_use_edge_connections** **(** :ref:`RID<class_RID>` map, :ref:`bool<class_bool>` enabled **)**
 
-Set the navigation ``map`` edge connection use. If ``enabled`` the navigation map allows navigation regions to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
+Set the navigation ``map`` edge connection use. If ``enabled`` is ``true``, the navigation map allows navigation regions to use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
 
 .. rst-class:: classref-item-separator
 
@@ -1375,7 +1409,7 @@ Returns ``true`` if the provided ``obstacle`` uses avoidance in 3D space Vector3
 
 void **obstacle_set_avoidance_enabled** **(** :ref:`RID<class_RID>` obstacle, :ref:`bool<class_bool>` enabled **)**
 
-If ``enabled`` the provided ``obstacle`` affects avoidance using agents.
+If ``enabled`` is ``true``, the provided ``obstacle`` affects avoidance using agents.
 
 .. rst-class:: classref-item-separator
 
@@ -1639,6 +1673,22 @@ Returns the ``ObjectID`` of the object which manages this region.
 
 ----
 
+.. _class_NavigationServer3D_method_region_get_random_point:
+
+.. rst-class:: classref-method
+
+:ref:`Vector3<class_Vector3>` **region_get_random_point** **(** :ref:`RID<class_RID>` region, :ref:`int<class_int>` navigation_layers, :ref:`bool<class_bool>` uniformly **)** |const|
+
+Returns a random position picked from all region polygons with matching ``navigation_layers``.
+
+If ``uniformly`` is ``true``, all region polygons and faces are weighted by their surface area (slower).
+
+If ``uniformly`` is ``false``, just a random polygon and face is picked (faster).
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NavigationServer3D_method_region_get_travel_cost:
 
 .. rst-class:: classref-method
@@ -1685,7 +1735,7 @@ If multiple navigation meshes have positions at equal distance the navigation re
 
 void **region_set_enabled** **(** :ref:`RID<class_RID>` region, :ref:`bool<class_bool>` enabled **)**
 
-If ``enabled`` is ``true`` the specified ``region`` will contribute to its current navigation map.
+If ``enabled`` is ``true``, the specified ``region`` will contribute to its current navigation map.
 
 .. rst-class:: classref-item-separator
 
@@ -1781,7 +1831,7 @@ Sets the ``travel_cost`` for this ``region``.
 
 void **region_set_use_edge_connections** **(** :ref:`RID<class_RID>` region, :ref:`bool<class_bool>` enabled **)**
 
-If ``enabled`` the navigation ``region`` will use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
+If ``enabled`` is ``true``, the navigation ``region`` will use edge connections to connect with other navigation regions within proximity of the navigation map edge connection margin.
 
 .. rst-class:: classref-item-separator
 
