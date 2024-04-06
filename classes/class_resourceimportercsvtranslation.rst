@@ -36,7 +36,7 @@ Comma-separated values are a plain text table storage format. The format's simpl
 Tutorials
 ---------
 
-- `Importing translations <https://docs.godotengine.org/en/latest/tutorials/assets_pipeline/importing_translations.html>`__
+- :doc:`Importing translations <../tutorials/assets_pipeline/importing_translations>`
 
 .. rst-class:: classref-reftable-group
 
@@ -88,3 +88,4 @@ The delimiter to use in the CSV file. The default value matches the common CSV c
 .. |static| replace:: :abbr:`static (This method doesn't need an instance to be called, so it can be called directly using the class name.)`
 .. |operator| replace:: :abbr:`operator (This method describes a valid operator to use with this type as left-hand operand.)`
 .. |bitfield| replace:: :abbr:`BitField (This value is an integer composed as a bitmask of the following flags.)`
+.. |void| replace:: :abbr:`void (No return value.)`
