@@ -147,7 +147,7 @@ The compression mode to use. Each compression mode provides a different tradeoff
 
 \ **Basis Universal:** Reduced quality, low memory usage, lowest size on disk, slow import. Only use for textures in 3D scenes, not for 2D elements.
 
-See `Compress mode <https://docs.godotengine.org/en/latest/tutorials/assets_pipeline/importing_images.html#compress-mode>`__ in the manual for more details.
+See `Compress mode <../tutorials/assets_pipeline/importing_images.html#compress-mode>`__ in the manual for more details.
 
 .. rst-class:: classref-item-separator
 
@@ -200,3 +200,4 @@ Controls how the cubemap's texture is internally laid out. When using high-resol
 .. |static| replace:: :abbr:`static (This method doesn't need an instance to be called, so it can be called directly using the class name.)`
 .. |operator| replace:: :abbr:`operator (This method describes a valid operator to use with this type as left-hand operand.)`
 .. |bitfield| replace:: :abbr:`BitField (This value is an integer composed as a bitmask of the following flags.)`
+.. |void| replace:: :abbr:`void (No return value.)`
